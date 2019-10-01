@@ -1,0 +1,53 @@
+### Authenticate
+
+POST {{baseUrl}}/credentials
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+### Create database and set odis to string converter
+
+PUT {{baseUrl}}/api/storage
+Authorization: Bearer {{token}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "rts": [
+    {
+      "name": "oidsToStrings",
+      "phase": "RESPONSE",
+      "scope": "CHILDREN"
+    },
+    {
+      "name": "stringToOids",
+      "phase": "REQUEST",
+      "scope": "CHILDREN"
+    }
+  ]
+}
+
+### Create schemas collection
+
+PUT {{baseUrl}}/api/storage/_schemas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+### Create settings collection
+
+PUT {{baseUrl}}/api/storage/settings
+Authorization: Bearer {{token}}
+Accept: application/json
+Content-Type: application/json
+
+###
+
+GET {{baseUrl}}/api/storage/settings
+Accept: application/json
+
+###

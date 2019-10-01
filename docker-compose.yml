@@ -1,0 +1,41 @@
+version: '3'
+
+networks:
+  cloud:
+    driver: bridge
+
+services:
+  message-broker:
+    image: rabbitmq:3.7-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=broker
+      - RABBITMQ_DEFAULT_PASS=admin
+    volumes:
+      - ./data/message-broker:/var/lib/rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - cloud
+
+  mongodb:
+    image: mongo:4.2.0-bionic
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: storage
+      MONGO_AUTH_SOURCE: admin
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet",  "rs1"]
+    volumes:
+      - ./config/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./data/mongo:/data/db
+    ports:
+      - 27017:27017
+    healthcheck:
+      test: "[ -f /data/health.check ] && exit 0 || exit 1"
+      interval: 1s
+      timeout: 30s
+      retries: 300
+    networks:
+      - cloud
