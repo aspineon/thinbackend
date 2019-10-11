@@ -27,8 +27,7 @@ class SecurityConfiguration(private val securityContextRepository: SecurityConte
                 .authenticationManager(authenticationManager)
                 .authorizeExchange()
                 .pathMatchers(HttpMethod.OPTIONS).permitAll()
-                .pathMatchers(HttpMethod.POST, "/credentials").permitAll()
-                .pathMatchers(HttpMethod.GET, "/api/**").permitAll()
+                .pathMatchers(HttpMethod.GET, "/**").permitAll()
                 .anyExchange().authenticated()
                 .and().build();
     }
