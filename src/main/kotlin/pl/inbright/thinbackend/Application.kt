@@ -2,11 +2,21 @@ package pl.inbright.thinbackend
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.scheduling.annotation.EnableScheduling
+import pl.inbright.thinbackend.mail.MailMessage
+import pl.inbright.thinbackend.mail.MailService
+import javax.annotation.PostConstruct
 
-@EnableScheduling
 @SpringBootApplication
-class Application
+class Application(val mailService: MailService) {
+
+    @PostConstruct
+    fun init() {
+        val message = MailMessage()
+        message.text = "Hello"
+        mailService.send(message)
+    }
+
+}
 
 fun main(args: Array<String>) {
     runApplication<Application>(*args)

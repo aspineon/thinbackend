@@ -39,16 +39,16 @@ spring:
     requested-heartbeat: 5
     username: broker
     password: admin
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: email@domain.pl
-    password: admin
-    tls: true
-    properties.mail.smtp:
-      auth: true
-      starttls.enable: true
-      ssl.trust: smtp.gmail.com
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: email@domain.pl
+#    password: admin
+#    tls: true
+#    properties.mail.smtp:
+#      auth: true
+#      starttls.enable: true
+#      ssl.trust: smtp.gmail.com
   jackson:
     default-property-inclusion: non_null
 thinBackend:
