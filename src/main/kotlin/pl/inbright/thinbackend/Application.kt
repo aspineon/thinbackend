@@ -7,19 +7,9 @@ import org.springframework.web.reactive.function.server.HandlerFunction
 import org.springframework.web.reactive.function.server.RequestPredicates.GET
 import org.springframework.web.reactive.function.server.RouterFunctions
 import org.springframework.web.reactive.function.server.ServerResponse
-import pl.inbright.thinbackend.mail.MailMessage
-import pl.inbright.thinbackend.mail.MailService
-import javax.annotation.PostConstruct
 
 @SpringBootApplication
-class Application(val mailService: MailService) {
-
-    @PostConstruct
-    fun init() {
-        val message = MailMessage()
-        message.text = "Hello"
-        mailService.send(message)
-    }
+class Application() {
 
     @Bean
     fun routes() = RouterFunctions.route(GET("/api/v1/messages"), HandlerFunction {

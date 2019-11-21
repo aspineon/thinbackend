@@ -28,27 +28,6 @@ spring:
                 maxSize: 5000000
             - RewritePath=/assets/(?<segment>.*), /assets/assets.files/$\{segment}
             - RemoveResponseHeader=X-Powered-By
-  rabbitmq:
-    listener:
-      simple:
-        concurrency: 10
-        max-concurrency: 20
-        retry:
-          enabled: true
-    connection-timeout: 0
-    requested-heartbeat: 5
-    username: broker
-    password: admin
-#  mail:
-#    host: smtp.gmail.com
-#    port: 587
-#    username: email@domain.pl
-#    password: admin
-#    tls: true
-#    properties.mail.smtp:
-#      auth: true
-#      starttls.enable: true
-#      ssl.trust: smtp.gmail.com
   jackson:
     default-property-inclusion: non_null
 thinBackend:
@@ -57,7 +36,6 @@ thinBackend:
   adminUsername: admin
   adminPassword: admin
   email-sender: admin@admin.pl
-  send-email-queue: send-email
   baseUrl: http://localhost:8080/storage
   baseEndpoint: storage
   apiPrefix: api
